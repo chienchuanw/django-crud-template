@@ -1,21 +1,21 @@
 {% extends "shared/base.html" %}
 
 {% block content %}
-
+<a href="{% url "tasks:index" %}">回到任務列表</a>
 <h1>新增任務</h1>
-
-
 <form method="POST" action="">
 	{% csrf_token %}
 
-	<label for="title">待辦事項</label>
-	<input name="title" type="text" id="title">
+	<div>
+		<label for="title">待辦事項</label>
+		<input name="title" type="text" id="title">
+	</div>
 
-	<label for="description">內容</label>
-	<textarea name="description" id="description"></textarea>
+	<div>
+		<label for="description">內容</label>
+		<textarea name="description" id="description"></textarea>
+	</div>
 
 	<button>創建</button>
 </form>
-
-
 {% endblock content %}

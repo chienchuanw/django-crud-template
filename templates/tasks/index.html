@@ -1,11 +1,18 @@
 {% extends "shared/base.html" %}
 
-{% block title %}tasks - index{% endblock title %}
+{% block title %}任務列表{% endblock title %}
 
 
 {% block content %}
 
-<h1>This is tasks/index</h1>
+<a href="{% url "pages:home" %}">回首頁</a>
+<h1>任務列表</h1>
 <a href="{% url 'tasks:add' %}">新增任務</a>
+
+<ul>
+	{% for task in tasks %}
+	<li><a href="{% url "tasks:detail" task.id %}">{{ task }}</a></li>
+	{% endfor %}
+</ul>
 
 {% endblock content %}
