@@ -3,7 +3,7 @@ server:
 
 
 migrations:
-	poetry run python manage.py makemigraetions
+	poetry run python manage.py makemigrations
 
 migrate:
 	poetry run python manage.py migrate
