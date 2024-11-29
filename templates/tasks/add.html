@@ -1,0 +1,21 @@
+{% extends "shared/base.html" %}
+
+{% block content %}
+
+<h1>新增任務</h1>
+
+
+<form method="POST" action="">
+	{% csrf_token %}
+
+	<label for="title">待辦事項</label>
+	<input name="title" type="text" id="title">
+
+	<label for="description">內容</label>
+	<textarea name="description" id="description"></textarea>
+
+	<button>創建</button>
+</form>
+
+
+{% endblock content %}
