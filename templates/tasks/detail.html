@@ -14,6 +14,6 @@
 {% if task.description %}
 <div>{{ task.description }}</div>
 {% endif %}
-
+<a href="{% url "tasks:edit" task.id %}">修改待辦事項</a>
 
 {% endblock content %}

@@ -20,6 +20,8 @@ def add(request: HttpRequest) -> HttpResponse:
         task.save()
 
         messages.success(request, "創建成功")
+
+        # 繼續待在新增頁面，可以進行下一筆任務新增
         return redirect("tasks:add")
 
     return render(request, "tasks/add.html")
@@ -30,3 +32,18 @@ def detail(request: HttpRequest, id: int) -> HttpResponse:
     context = {"task": task}
 
     return render(request, "tasks/detail.html", context)
+
+
+def edit(request: HttpRequest, id: int) -> HttpResponse:
+    task = get_object_or_404(Task, id=id)
+    context = {"task": task}
+
+    if request.POST:
+        task.title = request.POST.get("title", task.title)
+        task.description = request.POST.get("description", task.description)
+        task.save()
+
+        messages.success(request, "更新成功")
+        return redirect("tasks:detail", id=task.id)
+
+    return render(request, "tasks/edit.html", context)
