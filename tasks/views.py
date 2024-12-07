@@ -5,7 +5,8 @@ from django.contrib import messages
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    tasks = Task.objects.all()
+    # tasks = Task.objects.all()
+    tasks = Task.objects.filter(is_deleted=False)
 
     context = {"tasks": tasks}
 
@@ -52,8 +53,11 @@ def edit(request: HttpRequest, id: int) -> HttpResponse:
 def delete(request: HttpRequest, id: int) -> HttpResponse:
     if request.POST:
         task = get_object_or_404(Task, id=id)
-        task.delete()
 
-        messages.success(request, "刪除成功")
+        task.is_deleted = True
+        task.save()
+        # task.delete()
+
+        messages.success(request, "軟刪除成功")
 
         return redirect("tasks:index")
