@@ -47,3 +47,13 @@ def edit(request: HttpRequest, id: int) -> HttpResponse:
         return redirect("tasks:detail", id=task.id)
 
     return render(request, "tasks/edit.html", context)
+
+
+def delete(request: HttpRequest, id: int) -> HttpResponse:
+    if request.POST:
+        task = get_object_or_404(Task, id=id)
+        task.delete()
+
+        messages.success(request, "刪除成功")
+
+        return redirect("tasks:index")
